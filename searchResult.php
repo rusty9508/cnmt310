@@ -1,20 +1,18 @@
 <?php
-
 require_once("Template.php");
 
-$page = new Template("contactus");
-
-$page->setHeadSection("<link rel='stylesheet' href='main.css'>");
-
+//Database stuff
+require_once("DB.class.php");
+$db = new DB();
+$page = new Template("My Page");
+$page->setHeadSection("<script src='hello.js'></script><link rel='stylesheet' href='main.css'>");
 $page->setTopSection();
-
 $page->setBottomSection();
-
-
-
 print $page->getTopSection();
 
+
 print "<div class='border'> \n";
+print "<img src='http://st1.bgr.in/wp-content/uploads/2015/07/huawei-logo.jpg' alt='pic' width='150' height='80'/> \n";
 print "<div id='nav'> \n";
 print "<ul> \n";
 print "<li><a href='Home.php'>Home</a></li> \n";
@@ -24,21 +22,43 @@ print "<li><a href='#/shop'>Shop</a></li> \n";
 print "<li><a href='contactus.php'>Contact Us</a></li> \n";				
 print "</ul> \n";
 print "</div> \n";
+
 print "<div id= 'contact'> \n";
-print "<h1>Contact Us</h1> \n";
-print "<p>* Please fill out this form.</p> \n";
-print "<form action='Thankyou.html' method='post'> \n";
-print "<fieldset> \n";
-print "*First Name: <input name='firstName' type='text' /> <br /> \n";
-print "*Last Name: <input name='lastName' type='text' /> <br /> \n";
-print "*Email address: <input name='Email address' type='text' /> <br /> \n";
-print "*Phone Number: <input name='phone number' type='text' /> <br /> \n";	
-print "*Comment: <br/> \n";
-print "<textarea name='comment' rows='5' cols='58'></textarea><br/><br/>";			
-print "<button type='submit'>submit</button> \n";
-print "</fieldset> \n";
-print "</form> \n";	
-print "</div> \n";
+
+//Check if connected
+if (!$db->getConnStatus()) {
+  print "An error has occurred with connection\n";
+  exit;
+}
+
+//Create a search variable for the integer table ISBN
+$search = (int)$_POST['search'];
+//Create a search variable for author and booktitle that searchs things that start with the user input
+$searchLike = $_POST['search'] . "%";
+
+//The query for searching
+$query="SELECT * FROM bookinfo WHERE isbn = $search UNION 
+SELECT * FROM bookinfo WHERE author LIKE '$searchLike' UNION 
+SELECT * FROM bookinfo WHERE booktitle LIKE '$searchLike';";
+
+//Run query
+$result = $db->dbCall($query);
+
+print "<table>";
+print "<tr>";
+print "<th>Book Title</th>";
+print "<th>ISBN</th>";
+print "<th>Author</th>";
+print "</tr>";
+foreach($result as $row){
+	print "<tr>";
+	print "<td>" . $row['booktitle'] . "</td>";
+	print "<td>" . $row['isbn'] . "</td>";
+	print "<td>" . $row['author'] . "</td>";
+	print "</tr>";
+}
+print "</table>";
+
 print "</div> \n";
 
 print "<div id='footer'> \n";
@@ -76,4 +96,6 @@ print "</div> \n";
 
 
 print $page->getBottomSection();
-?>	
+
+
+?>

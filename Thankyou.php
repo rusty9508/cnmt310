@@ -2,7 +2,7 @@
 
 require_once("Template.php");
 
-$page = new Template("contactus");
+$page = new Template("Thankyou");
 
 $page->setHeadSection("<link rel='stylesheet' href='main.css'>");
 
@@ -10,10 +10,30 @@ $page->setTopSection();
 
 $page->setBottomSection();
 
+//Database stuff
+require_once("DB.class.php");
+$db = new DB();
 
+//Check if connected
+if (!$db->getConnStatus()) {
+  print "An error has occurred with connection\n";
+  exit;
+}
+
+//Create a search variable for the integer table ISBN
+$search = (int)$_POST['search'];
+//Create a search variable for author and booktitle that searchs things that start with the user input
+$searchLike = $_POST['search'] . "%";
+
+//The query for searching
+$query="SELECT * FROM bookinfo WHERE isbn = $search UNION 
+SELECT * FROM bookinfo WHERE author LIKE '$searchLike' UNION 
+SELECT * FROM bookinfo WHERE booktitle LIKE '$searchLike';";
+
+//Run query
+$result = $db->dbCall($query);
 
 print $page->getTopSection();
-
 print "<div class='border'> \n";
 print "<div id='nav'> \n";
 print "<ul> \n";
@@ -24,39 +44,24 @@ print "<li><a href='#/shop'>Shop</a></li> \n";
 print "<li><a href='contactus.php'>Contact Us</a></li> \n";				
 print "</ul> \n";
 print "</div> \n";
-print "<div id= 'contact'> \n";
-print "<h1>Contact Us</h1> \n";
-print "<p>* Please fill out this form.</p> \n";
-print "<form action='Thankyou.html' method='post'> \n";
-print "<fieldset> \n";
-print "*First Name: <input name='firstName' type='text' /> <br /> \n";
-print "*Last Name: <input name='lastName' type='text' /> <br /> \n";
-print "*Email address: <input name='Email address' type='text' /> <br /> \n";
-print "*Phone Number: <input name='phone number' type='text' /> <br /> \n";	
-print "*Comment: <br/> \n";
-print "<textarea name='comment' rows='5' cols='58'></textarea><br/><br/>";			
-print "<button type='submit'>submit</button> \n";
-print "</fieldset> \n";
-print "</form> \n";	
-print "</div> \n";
-print "</div> \n";
+print "<h1>Thank you for contacting us, we will contact you in 24 hours.</h1>  \n";
 
 print "<div id='footer'> \n";
 print "<div id='shop' style='float:left'> \n"; 
 print "<h2>Shop</h2> \n";
 print "<ul> \n";
-print "<li><a href='#/book'>Book</a></li> \n";
-print "<li><a href='#/ebook'>EBook</a></li> \n";
-print "<li><a href='#/sell'>Sell</a></li> \n";
-print "<li><a href='#/art'>Art</a></li> \n";
+print "<li><a href='#/phone'>Phone</a></li> \n";
+print "<li><a href='#/computer'>Computer</a></li> \n";
+print "<li><a href='#/tv'>TV</a></li> \n";
+print "<li><a href='#/music'>Music</a></li> \n";
 print "<li><a href='#/giftcard'>Gift Cards</a></li> \n";
 print "</ul> \n";
 print "</div> \n";
 print "<div id='store'> \n";		
-print "<h2>Book Store</h2> \n";			
+print "<h2>Huawei Store</h2> \n";			
 print "<ul> \n";
 print "<li><a href='#/findastore'>Find a Store </a></li> \n";
-print "<li><a href='#/camp'>Camp</a></li> \n";
+print "<li><a href='#/Huaweicamp'>HUAWEI Camp</a></li> \n";
 print "<li><a href='#/downloadanapp'>Download an App</a></li> \n";
 print "<li><a href='#/orderstatus'>Order Status</a></li> \n";
 print "</ul> \n";				
