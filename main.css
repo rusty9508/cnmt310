@@ -79,10 +79,7 @@ body,div,h1,form,fieldset,input{
 			margin-left:30px;		
 			}	
 		#store{
-			/*margin-left:730px;
-			margin-top:-15px;*/
-			width: xpx;
-			margin: 0 auto;
+			text-align: center;
 		}
 		#others{
 			margin-right:60px;
