@@ -12,14 +12,7 @@ print $page->getTopSection();
 
 /*for nav and bottom*/print $myPage->getTopSection();
 
-print "<div id= 'contact'> \n";
-print "<form method='post' action='searchResult.php'>";
-print "<fieldset> \n";
-print "Search: <input type='text' name='search'>";
-print "<br><input type='submit' name='Submit' value='Submit'>";
-print "</fieldset> \n";
-print "</form>";
-print "</div> \n";
+//Your Content Here
 
 /*for nav and bottom*/print $myPage->getBottomSection();
 
