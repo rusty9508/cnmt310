@@ -23,8 +23,12 @@ if (!$db->getConnStatus()) {
 
 //Create a search variable for the integer table ISBN
 $search = (int)$_POST['search'];
+$search = filter_var($search, FILTER_SANITIZE_NUMBER_INT);
 //Create a search variable for author and booktitle that searchs things that start with the user input
-$searchLike = $_POST['search'] . "%";
+$searchLike = $_POST['search'];
+$searchLike = filter_var($searchLike,FILTER_SANITIZE_STRING);
+$searchLike .= "%";
+
 
 //The query for searching
 $query="SELECT * FROM bookinfo WHERE isbn = $search UNION 
@@ -33,7 +37,7 @@ SELECT * FROM bookinfo WHERE booktitle LIKE '$searchLike';";
 
 //Run query
 $result = $db->dbCall($query);
-
+print "<div id=contact>";
 print "<table>";
 print "<tr>";
 print "<th>Book Title</th>";
@@ -48,7 +52,6 @@ foreach($result as $row){
 	print "</tr>";
 }
 print "</table>";
-
 print "</div> \n";
 
 /*for nav and bottom*/print $myPage->getBottomSection();
