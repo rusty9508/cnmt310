@@ -24,20 +24,14 @@ print $page->getTopSection();
 
 print "<br />";
 print "<h1> This is our Story </h1> \n";
-print "<p>Huawei is a leading global provider of information and communications 
-	technology (ICT) infrastructure and smart devices. With integrated solutions
-	across four key domains telecom networks, IT, smart devices, and cloud services
-	we are committed to bringing digital to every person, home and organization for
-	a fully connected, intelligent world.</p> \n";
-print "<p>Huawei's end-to-end portfolio of products, solutions and services are both 
-	competitive and secure. Through open collaboration with ecosystem partners,
-	we create lasting value for our customers, working to empower people,
-	enrich home life, and inspire innovation in organizations of all shapes and sizes.</p> \n";
-print "<p>At Huawei, innovation focuses on customer needs. We invest heavily in basic research,
-	concentrating on technological breakthroughs that drive the world forward. We have
-	more than 180,000 employees, and we operate in more than 170 countries and regions.
-	Founded in 1987, Huawei is a private company fully owned by its employees.</p> \n";
+
+print "<div id=contact> \n";
+
+print "<p>We're a bookstore</p> \n";
+print "<p>Yay</p> \n";
+print "<p>Opening 2018</p> \n";
 print "</div> \n";
+
 print "<div class='video'> \n";
 print "<iframe width='550' height='350' \n"; 
 print "src='https://www.youtube.com/embed/9gFFuXJIPVE'  allow='autoplay; encrypted-media' allowfullscreen></iframe> \n";
