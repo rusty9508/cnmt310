@@ -13,7 +13,7 @@ class navAndbottom {
 		
 		$returnVal = "";
 		$returnVal .= "<div class='border'> \n";
-		$returnVal .= "<img src='http://st1.bgr.in/wp-content/uploads/2015/07/huawei-logo.jpg' alt='pic' width='150' height='80'/> \n";
+		$returnVal .= "<img src='Pictures/icon' alt='pic' width='150' height='100'/> \n";
 		$returnVal .= "<div id='nav'> \n";
 		$returnVal .= "<ul> \n";
 		$returnVal .= "<li><a href='Home.php'>Home</a></li> \n";
